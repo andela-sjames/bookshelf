@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+    <form>
+        <input type="text" placeholder="Search by Book name or Book Category" name="q" list="book_id">
+            <datalist id="book_id">
+                {% for category in categories %}
+                    <option value="{{ category.name }}">
+                {% endfor %}
+            </datalist>
+        <input type="submit" class="btn btn-success">
+    </form>
+
+    {% for book in books %}
+    <div class="card horizontal">
+      
+        <div class="card-stacked">
+            <div class="card-content">
+                    <h5> {{ book.title }}<h5>
+                    <p> by {{ book.author }}</p>
+                    <p>{{ book.category.name }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p>Book not found </p>
+    {% endfor %}
+
+
+{% endblock main %}

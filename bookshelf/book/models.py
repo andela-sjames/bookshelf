@@ -13,9 +13,9 @@ class Book(models.Model):
     title = models.CharField(max_length=60)
     author = models.CharField(max_length=60)
     category = models.ForeignKey(
-        Category, 
+        Category,
         on_delete=models.CASCADE, 
         related_name='books')
-    
+
     def __unicode__(self):
         return self.title
