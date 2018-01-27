@@ -94,3 +94,7 @@ ENV/
 # ignore .ssh & .vagrant file
 .ssh
 .vagrant
+
+
+# ignore .vscode
+.vscode
