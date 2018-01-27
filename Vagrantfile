@@ -48,9 +48,6 @@ Vagrant.configure("2") do |config|
     config.vbguest.auto_update = false  
   end
 
-  # config.vm.synced_folder '.', '/vagrant', disabled: true
-  # config.vm.synced_folder '.', '/home/vagrant'
-  
   config.vm.provider 'virtualbox' do |v|
     v.memory = 2048
     v.cpus = 2
