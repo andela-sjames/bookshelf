@@ -39,14 +39,14 @@ Vagrant.configure("2") do |config|
   end
 
 
-  # config.vm.provision "shell" do |s|
-  #   s.path = ".provision/setup_nginx.sh"
-  #   s.args = ["set_up_nginx"]
-  # end
+  config.vm.provision "shell" do |s|
+    s.path = ".provision/setup_nginx.sh"
+    s.args = ["set_up_nginx"]
+  end
   
-  # if Vagrant.has_plugin?("vagrant-vbguest")
-  #   config.vbguest.auto_update = false  
-  # end
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vbguest.auto_update = false  
+  end
 
   # config.vm.synced_folder '.', '/vagrant', disabled: true
   # config.vm.synced_folder '.', '/home/vagrant'

@@ -3,16 +3,14 @@
 # reference: https://gist.github.com/davisford/8000332
 
 echo "-------------------- updating package lists and installing packages"
-apt-get update && apt-get install -y python-pip python-dev build-essential curl
+apt-get update && apt-get -y install python-pip python-dev build-essential curl
 apt-get install -y libpq-dev postgresql postgresql-contrib libmysqlclient-dev
 
-echo "-------------------- uncomment to use virtualenv within ur vagrant environment"
-# curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.10.1.tar.gz
-# tar xvfz virtualenv-1.10.1.tar.gz
-# cd virtualenv-1.10.1
-# sudo python setup.py install
-
-pip install --index-url=https://pypi.python.org/simple/ -r /vagrant/requirements.txt
+echo "-------------------- installing virtualenv"
+curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.10.1.tar.gz
+tar xvfz virtualenv-1.10.1.tar.gz
+cd virtualenv-1.10.1
+sudo python setup.py install
 
 # fix permissions
 echo "-------------------- fixing listen_addresses on postgresql.conf"
