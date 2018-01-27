@@ -10,7 +10,7 @@ public_key = IO.read(public_key_path)
 
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/precise64"
-  config.vm.hostname = "bucketlist-dev"
+  config.vm.hostname = "bookshelf-dev"
   config.vm.network "private_network", ip: "192.168.50.4"
   
   config.ssh.insert_key = false
@@ -23,13 +23,13 @@ Vagrant.configure("2") do |config|
   # use personal public and private key for security reasons
   config.vm.provision :shell, :inline => <<-SCRIPT
     set -e
-    mkdir -p /home/vagrant/.ssh/
+    mkdir -p /vagrant/.ssh/
 
-    echo '#{private_key}' > /home/vagrant/.ssh/id_rsa
-    chmod 600 /home/vagrant/.ssh/id_rsa
+    echo '#{private_key}' > /vagrant/.ssh/id_rsa
+    chmod 600 /vagrant/.ssh/id_rsa
 
-    echo '#{public_key}' > /home/vagrant/.ssh/authorized_keys
-    chmod 600 /home/vagrant/.ssh/authorized_keys
+    echo '#{public_key}' > /vagrant/.ssh/authorized_keys
+    chmod 600 /vagrant/.ssh/authorized_keys
   SCRIPT
 
 
@@ -52,8 +52,8 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder '.', '/home/vagrant'
   
   config.vm.provider 'virtualbox' do |v|
-    v.memory = 1024
-    v.cpus = 1
+    v.memory = 2048
+    v.cpus = 2
   end
 
   config.vm.post_up_message = "At this point use `vagrant ssh` to ssh into the development environment"

@@ -6,12 +6,11 @@ echo "-------------------- updating package lists and installing packages"
 apt-get update && apt-get install -y python-pip python-dev build-essential curl
 apt-get install -y libpq-dev postgresql postgresql-contrib libmysqlclient-dev
 
+echo "-------------------- uncomment to use virtualenv within ur vagrant environment"
 # curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.10.1.tar.gz
 # tar xvfz virtualenv-1.10.1.tar.gz
 # cd virtualenv-1.10.1
 # sudo python setup.py install
-
-# source "/vagrant/env/bin/activate"
 
 pip install --index-url=https://pypi.python.org/simple/ -r /vagrant/requirements.txt
 
@@ -34,34 +33,15 @@ echo "-------------------- creating wtm database"
 # Create WTM database
 sudo su postgres -c "createdb -E UTF8 -T template0 --locale=en_US.utf8 -O vagrant wtm"
 
-echo "-------------------- creating BucketlistApp database"
-sudo su postgres -c "psql -c \"CREATE DATABASE BucketlistApp\" " 
-sudo su postgres -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE BucketlistApp to vagrant\" "
+echo "-------------------- creating bookshelf database"
+# not really used for this tutorial but here for those who might need it though... 
+sudo su postgres -c "psql -c \"CREATE DATABASE bookshelf\" " 
+sudo su postgres -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE bookshelf to vagrant\" "
 
 echo "-------------------- creating vagrant database"
 sudo su postgres -c "psql -c \"CREATE DATABASE vagrant\" " 
 sudo su postgres -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE vagrant to vagrant\" "
 
-
-
-
-### Define script variables
-### ====================================================================================$
-
-NAME="bucketlistapp application"                                        # Name of the application
-DJANGODIR=/home/vagrant/bucketlistapp                                   # django project directo$
-NUM_WORKERS=3                                                           # No. of worker processe$
-DJANGO_SETTINGS_MODULE=bucketlistapp.settings                           # Settings file that Gun$
-DJANGO_WSGI_MODULE=bucketlistapp.wsgi                                   # WSGI module name
-DJANGO_PROD_DEBUG=True
-
-### activate the virtualenv
-### ====================================================================================$
-
-echo "Starting $NAME as `whoami`"
-export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
-export DEBUG=$DJANGO_PROD_DEBUG
-### Start Gunicorn
-### ====================================================================================$
-
-gunicorn bucketlistapp.wsgi --workers $NUM_WORKERS --bind 127.0.0.1:8000 --pythonpath=bucketlistapp
+echo "....... Making use of sqlite for this demo... ¯\_(ツ)_/¯ to make use of postgres..."
+echo "....... uncomment the config in settings.py you can either vagrant reload, vagrant destroy and/or Vagrant up"
+echo "....... reference the docs for use case :) "
