@@ -29,5 +29,5 @@ ENV PYTHONUNBUFFERED 1
 # change user to newly created user
 USER bookshelfapp
 
-RUN /bin/bash -c "python manage.py makemigrations && python manage.py migrate \
+RUN /bin/bash --login -c "python manage.py makemigrations && python manage.py migrate \
     && python manage.py runserver"

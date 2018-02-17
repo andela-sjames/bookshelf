@@ -1,0 +1,13 @@
+.git
+.gitignore
+.vscode
+.provision
+.ssh
+.vagrant
+docs
+env
+logs
+LICENSE
+README.md
+start_app.sh
+vagrantfile
