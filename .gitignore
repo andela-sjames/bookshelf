@@ -98,3 +98,5 @@ ENV/
 
 # ignore .vscode
 .vscode
+
+sample.json
