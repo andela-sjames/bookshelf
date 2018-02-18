@@ -23,11 +23,11 @@ RUN usermod -aG docker bookshelfapp
 
 # grant newly created user permissions on essential files
 RUN chown -R bookshelfapp:$(id -gn bookshelfapp) /app/
-RUN chmod +x ./scripts/run_web.sh && chmod +x ./scripts/launch.sh
 ENV PYTHONUNBUFFERED 1
 
 # change user to newly created user
 USER bookshelfapp
 
-RUN /bin/bash --login -c "python manage.py makemigrations && python manage.py migrate \
-    && python manage.py runserver"
+RUN /bin/bash --login -c "python bookshelf/manage.py makemigrations && python bookshelf/manage.py migrate"
+
+CMD ["python", "bookshelf/manage.py", "runserver", "0.0.0.0:8000"]
