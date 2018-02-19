@@ -1,0 +1,24 @@
+{
+    "family": "sample-ecr-bookshelf",
+    "containerDefinitions": [
+        {
+            "name": "sample-ecr-bookshelf",
+            "image": "768614346553.dkr.ecr.us-east-1.amazonaws.com/bookshelfapp_ecr:latest",
+            "cpu": 10,
+            "memory": 500,
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000
+                }
+            ],
+            "entryPoint": [
+                "python",
+                "bookshelf/manage.py",
+                "runserver",
+                "0.0.0.0:8000"
+            ],
+            "essential": true
+        }
+    ]
+}
