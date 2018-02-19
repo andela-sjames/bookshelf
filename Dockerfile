@@ -27,7 +27,14 @@ ENV PYTHONUNBUFFERED 1
 
 # change user to newly created user
 USER bookshelfapp
-
 RUN /bin/bash --login -c "python bookshelf/manage.py makemigrations && python bookshelf/manage.py migrate"
+EXPOSE 8000
 
 CMD ["python", "bookshelf/manage.py", "runserver", "0.0.0.0:8000"]
+
+# rebuild image with Nginx here and this should work on AWS ECS
+# currently port 8000 does not map properly, this should be placed behind a proxy
+# Work in progress. 
+
+
+# while this works correctly locally, it can't be discovered on AWS via ECS... 
